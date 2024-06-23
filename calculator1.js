@@ -1,34 +1,24 @@
-function calculateSampler() {
-    var bits = document.getElementById('samplerBits').value;
-    var rate = document.getElementById('samplerRate').value;
-    var output = "Total Bits Transmitted = " + (bits * rate) + " bits/s";
-    document.getElementById('samplerResult').innerHTML = output;
-}
+function calculateAll() {
+    // Inputs
+    var samplerBits = parseInt(document.getElementById('samplerBits').value);
+    var samplerRate = parseInt(document.getElementById('samplerRate').value);
+    var quantizerBits = parseInt(document.getElementById('quantizerBits').value);
+    var quantizerRate = parseInt(document.getElementById('quantizerRate').value);
+    var encoderBits = parseInt(document.getElementById('encoderBits').value);
+    var encoderRate = parseInt(document.getElementById('encoderRate').value);
+    var channelEncoderBits = parseInt(document.getElementById('channelEncoderBits').value);
+    var channelEncoderRate = parseInt(document.getElementById('channelEncoderRate').value);
+    var interleaverBits = parseInt(document.getElementById('interleaverBits').value);
+    var interleaverRate = parseInt(document.getElementById('interleaverRate').value);
 
-function calculateQuantizer() {
-    var bits = document.getElementById('quantizerBits').value;
-    var rate = document.getElementById('quantizerRate').value;
-    var output = "Total Bits Transmitted = " + (bits * rate) + " bits/s";
-    document.getElementById('quantizerResult').innerHTML = output;
-}
+    // Calculations
+    document.getElementById('samplingFrequency').innerHTML = "Sampling Frequency: " + samplerRate + " Hz";
+    document.getElementById('quantizationLevels').innerHTML = "Number of Quantization Levels: " + Math.pow(2, quantizerBits);
+    document.getElementById('sourceEncoderInputBitrate').innerHTML = "Bit Rate at Input of Source Encoder: " + (encoderBits * encoderRate) + " bits/s";
+    document.getElementById('sourceEncoderOutputBitrate').innerHTML = "Bit Rate at Output of Source Encoder: " + (encoderBits * encoderRate / 2) + " bits/s"; // Assuming some compression ratio
+    document.getElementById('channelEncoderOutputBitrate').innerHTML = "Bit Rate at Output of Channel Encoder: " + (channelEncoderBits * channelEncoderRate) + " bits/s";
+    document.getElementById('interleaverOutputBitrate').innerHTML = "Bit Rate at Output of Interleaver: " + (interleaverBits * interleaverRate) + " bits/s";
 
-function calculateEncoder() {
-    var bits = document.getElementById('encoderBits').value;
-    var rate = document.getElementById('encoderRate').value;
-    var output = "Total Bits Transmitted = " + (bits * rate) + " bits/s";
-    document.getElementById('encoderResult').innerHTML = output;
-}
-
-function calculateChannelEncoder() {
-    var bits = document.getElementById('channelEncoderBits').value;
-    var rate = document.getElementById('channelEncoderRate').value;
-    var output = "Total Bits Transmitted = " + (bits * rate) + " bits/s";
-    document.getElementById('channelEncoderResult').innerHTML = output;
-}
-
-function calculateInterleaver() {
-    var bits = document.getElementById('interleaverBits').value;
-    var rate = document.getElementById('interleaverRate').value;
-    var output = "Total Bits Transmitted = " + (bits * rate) + " bits/s";
-    document.getElementById('interleaverResult').innerHTML = output;
+    // Display results section
+    document.getElementById('results').style.display = 'block';
 }

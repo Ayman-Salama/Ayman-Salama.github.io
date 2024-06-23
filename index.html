@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="styles.css">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,55 +9,43 @@
     <h1>Communication System Components Calculator</h1>
 
     <div>
-        <h2>Sampler</h2>
-        <label for="samplerBits">Number of Bits:</label>
+        <label for="samplerBits">Sampler - Number of Bits:</label>
         <input type="number" id="samplerBits" name="samplerBits"><br>
-        <label for="samplerRate">Rate (Hz):</label>
+        <label for="samplerRate">Sampler - Rate (Hz):</label>
         <input type="number" id="samplerRate" name="samplerRate"><br>
-        <button onclick="calculateSampler()">Calculate</button>
-        <p id="samplerResult"></p>
-    </div>
 
-    <div>
-        <h2>Quantizer</h2>
-        <label for="quantizerBits">Number of Bits:</label>
+        <label for="quantizerBits">Quantizer - Number of Bits:</label>
         <input type="number" id="quantizerBits" name="quantizerBits"><br>
-        <label for="quantizerRate">Rate (Hz):</label>
+        <label for="quantizerRate">Quantizer - Rate (Hz):</label>
         <input type="number" id="quantizerRate" name="quantizerRate"><br>
-        <button onclick="calculateQuantizer()">Calculate</button>
-        <p id="quantizerResult"></p>
-    </div>
 
-    <div>
-        <h2>Source Encoder</h2>
-        <label for="encoderBits">Number of Bits:</label>
+        <label for="encoderBits">Source Encoder - Number of Bits:</label>
         <input type="number" id="encoderBits" name="encoderBits"><br>
-        <label for="encoderRate">Rate (Hz):</label>
+        <label for="encoderRate">Source Encoder - Rate (Hz):</label>
         <input type="number" id="encoderRate" name="encoderRate"><br>
-        <button onclick="calculateEncoder()">Calculate</button>
-        <p id="encoderResult"></p>
-    </div>
 
-    <div>
-        <h2>Channel Encoder</h2>
-        <label for="channelEncoderBits">Number of Bits:</label>
+        <label for="channelEncoderBits">Channel Encoder - Number of Bits:</label>
         <input type="number" id="channelEncoderBits" name="channelEncoderBits"><br>
-        <label for="channelEncoderRate">Rate (Hz):</label>
+        <label for="channelEncoderRate">Channel Encoder - Rate (Hz):</label>
         <input type="number" id="channelEncoderRate" name="channelEncoderRate"><br>
-        <button onclick="calculateChannelEncoder()">Calculate</button>
-        <p id="channelEncoderResult"></p>
-    </div>
 
-    <div>
-        <h2>Interleaver</h2>
-        <label for="interleaverBits">Number of Bits:</label>
+        <label for="interleaverBits">Interleaver - Number of Bits:</label>
         <input type="number" id="interleaverBits" name="interleaverBits"><br>
-        <label for="interleaverRate">Rate (Hz):</label>
+        <label for="interleaverRate">Interleaver - Rate (Hz):</label>
         <input type="number" id="interleaverRate" name="interleaverRate"><br>
-        <button onclick="calculateInterleaver()">Calculate</button>
-        <p id="interleaverResult"></p>
+
+        <button onclick="calculateAll()">Calculate</button>
     </div>
 
-    <script src="calculator1.js"></script>
+    <div id="results">
+        <p id="samplingFrequency">Sampling Frequency: </p>
+        <p id="quantizationLevels">Number of Quantization Levels: </p>
+        <p id="sourceEncoderInputBitrate">Bit Rate at Input of Source Encoder: </p>
+        <p id="sourceEncoderOutputBitrate">Bit Rate at Output of Source Encoder: </p>
+        <p id="channelEncoderOutputBitrate">Bit Rate at Output of Channel Encoder: </p>
+        <p id="interleaverOutputBitrate">Bit Rate at Output of Interleaver: </p>
+    </div>
+
+    <script src="calculator.js"></script>
 </body>
 </html>
