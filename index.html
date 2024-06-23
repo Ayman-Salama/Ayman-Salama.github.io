@@ -2,48 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Communication System Components Calculator</title>
+    <title>Cellular System Design Calculator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Communication System Components Calculator</h1>
-
+    <h1>Cellular System Design Calculator</h1>
     <div>
-        <label for="samplerBits">Sampler - Number of Bits:</label>
-        <input type="number" id="samplerBits" name="samplerBits"><br>
-        <label for="samplerRate">Sampler - Rate (Hz):</label>
-        <input type="number" id="samplerRate" name="samplerRate"><br>
+        <label for="timeSlots">Time Slots per Carrier:</label>
+        <input type="number" id="timeSlots"><br>
+        
+        <label for="totalArea">Total Area (km²):</label>
+        <input type="number" id="totalArea"><br>
+        
+        <label for="totalUsers">Total Users:</label>
+        <input type="number" id="totalUsers"><br>
+        
+        <label for="callsPerDay">Calls per Day (λ):</label>
+        <input type="number" id="callsPerDay"><br>
+        
+        <label for="avgCallDuration">Average Call Duration (H in minutes):</label>
+        <input type="number" id="avgCallDuration"><br>
+        
+        <label for="GOS">Grade of Service (Erlang B):</label>
+        <input type="number" id="GOS" step="0.0001"><br>
+        
+        <label for="SIR">Signal Interference Ratio (SIR):</label>
+        <input type="number" id="SIR"><br>
+        
+        <label for="refDistance">Reference Distance (m):</label>
+        <input type="number" id="refDistance"><br>
+        
+        <label for="powerAtRefDistance">Power Measured at Reference Distance (W):</label>
+        <input type="number" id="powerAtRefDistance"><br>
+        
+        <label for="pathLossExponent">Path Loss Exponent (n):</label>
+        <input type="number" id="pathLossExponent" step="0.1"><br>
+        
+        <label for="receiverSensitivity">Receiver Sensitivity (W):</label>
+        <input type="number" id="receiverSensitivity"><br>
 
-        <label for="quantizerBits">Quantizer - Number of Bits:</label>
-        <input type="number" id="quantizerBits" name="quantizerBits"><br>
-        <label for="quantizerRate">Quantizer - Rate (Hz):</label>
-        <input type="number" id="quantizerRate" name="quantizerRate"><br>
-
-        <label for="encoderBits">Source Encoder - Number of Bits:</label>
-        <input type="number" id="encoderBits" name="encoderBits"><br>
-        <label for="encoderRate">Source Encoder - Rate (Hz):</label>
-        <input type="number" id="encoderRate" name="encoderRate"><br>
-
-        <label for="channelEncoderBits">Channel Encoder - Number of Bits:</label>
-        <input type="number" id="channelEncoderBits" name="channelEncoderBits"><br>
-        <label for="channelEncoderRate">Channel Encoder - Rate (Hz):</label>
-        <input type="number" id="channelEncoderRate" name="channelEncoderRate"><br>
-
-        <label for="interleaverBits">Interleaver - Number of Bits:</label>
-        <input type="number" id="interleaverBits" name="interleaverBits"><br>
-        <label for="interleaverRate">Interleaver - Rate (Hz):</label>
-        <input type="number" id="interleaverRate" name="interleaverRate"><br>
-
-        <button onclick="calculateAll()">Calculate</button>
+        <button onclick="calculateOutputs()">Calculate</button>
     </div>
-
-    <div id="results">
-        <p id="samplingFrequency">Sampling Frequency: </p>
-        <p id="quantizationLevels">Number of Quantization Levels: </p>
-        <p id="sourceEncoderInputBitrate">Bit Rate at Input of Source Encoder: </p>
-        <p id="sourceEncoderOutputBitrate">Bit Rate at Output of Source Encoder: </p>
-        <p id="channelEncoderOutputBitrate">Bit Rate at Output of Channel Encoder: </p>
-        <p id="interleaverOutputBitrate">Bit Rate at Output of Interleaver: </p>
+    
+    <div id="results" class="hidden">
+        <p id="maxDistance">Maximum Distance Between Transmitter and Receiver: </p>
+        <p id="maxCellSize">Maximum Cell Size Assuming Hexagonal Cells: </p>
+        <p id="numCells">Number of Cells in the Service Area: </p>
+        <p id="cellTrafficErlangs">Traffic Load in Each Cell in Erlangs: </p>
+        <p id="cellTraffic">Traffic Load in Each Cell: </p>
+        <p id="cellsInCluster">Number of Cells in Each Cluster: </p>
     </div>
 
     <script src="calculator.js"></script>

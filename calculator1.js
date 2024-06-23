@@ -1,24 +1,29 @@
-function calculateAll() {
-    // Inputs
-    var samplerBits = parseInt(document.getElementById('samplerBits').value);
-    var samplerRate = parseInt(document.getElementById('samplerRate').value);
-    var quantizerBits = parseInt(document.getElementById('quantizerBits').value);
-    var quantizerRate = parseInt(document.getElementById('quantizerRate').value);
-    var encoderBits = parseInt(document.getElementById('encoderBits').value);
-    var encoderRate = parseInt(document.getElementById('encoderRate').value);
-    var channelEncoderBits = parseInt(document.getElementById('channelEncoderBits').value);
-    var channelEncoderRate = parseInt(document.getElementById('channelEncoderRate').value);
-    var interleaverBits = parseInt(document.getElementById('interleaverBits').value);
-    var interleaverRate = parseInt(document.getElementById('interleaverRate').value);
+function calculateOutputs() {
+    const timeSlots = parseFloat(document.getElementById('timeSlots').value);
+    const totalArea = parseFloat(document.getElementById('totalArea').value);
+    const totalUsers = parseFloat(document.getElementById('totalUsers').value);
+    const callsPerDay = parseFloat(document.getElementById('callsPerDay').value);
+    const avgCallDuration = parseFloat(document.getElementById('avgCallDuration').value);
+    const GOS = parseFloat(document.getElementById('GOS').value);
+    const SIR = parseFloat(document.getElementById('SIR').value);
+    const refDistance = parseFloat(document.getElementById('refDistance').value);
+    const powerAtRefDistance = parseFloat(document.getElementById('powerAtRefDistance').value);
+    const pathLossExponent = parseFloat(document.getElementById('pathLossExponent').value);
+    const receiverSensitivity = parseFloat(document.getElementById('receiverSensitivity').value);
 
-    // Calculations
-    document.getElementById('samplingFrequency').innerHTML = "Sampling Frequency: " + samplerRate + " Hz";
-    document.getElementById('quantizationLevels').innerHTML = "Number of Quantization Levels: " + Math.pow(2, quantizerBits);
-    document.getElementById('sourceEncoderInputBitrate').innerHTML = "Bit Rate at Input of Source Encoder: " + (encoderBits * encoderRate) + " bits/s";
-    document.getElementById('sourceEncoderOutputBitrate').innerHTML = "Bit Rate at Output of Source Encoder: " + (encoderBits * encoderRate / 2) + " bits/s"; // Assuming some compression ratio
-    document.getElementById('channelEncoderOutputBitrate').innerHTML = "Bit Rate at Output of Channel Encoder: " + (channelEncoderBits * channelEncoderRate) + " bits/s";
-    document.getElementById('interleaverOutputBitrate').innerHTML = "Bit Rate at Output of Interleaver: " + (interleaverBits * interleaverRate) + " bits/s";
+    const maxDistance = refDistance / Math.pow(receiverSensitivity / powerAtRefDistance, 1 / pathLossExponent);
+    const maxCellSize = ((3 * Math.sqrt(3) / 2) * Math.pow(maxDistance, 2));
+    const numCells = totalArea / maxCellSize;
+    const cellTrafficErlangs = totalUsers * callsPerDay * avgCallDuration;
+    const cellTraffic = cellTrafficErlangs / numCells;
+    const cellsInCluster = (1/3) * Math.pow((6 * SIR), (2 / pathLossExponent));
 
-    // Display results section
-    document.getElementById('results').style.display = 'block';
+    document.getElementById('maxDistance').textContent = `Maximum Distance Between Transmitter and Receiver: ${maxDistance.toFixed(2)} meters`;
+    document.getElementById('maxCellSize').textContent = `Maximum Cell Size Assuming Hexagonal Cells: ${maxCellSize.toFixed(2)} square meters`;
+    document.getElementById('numCells').textContent = `Number of Cells in the Service Area: ${numCells.toFixed(0)}`;
+    document.getElementById('cellTrafficErlangs').textContent = `Traffic Load in Each Cell in Erlangs: ${cellTrafficErlangs.toFixed(2)} Erlangs`;
+    document.getElementById('cellTraffic').textContent = `Traffic Load in Each Cell: ${cellTraffic.toFixed(2)}`;
+    document.getElementById('cellsInCluster').textContent = `Number of Cells in Each Cluster: ${cellsInCluster.toFixed(2)}`;
+
+    document.getElementById('results').classList.remove('hidden');
 }
